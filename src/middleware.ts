@@ -1,7 +1,11 @@
 export { default } from "next-auth/middleware"
 
-const protectedRoutes = [
-    "/"
-]
+export const config = { matcher: ["/"] }
 
-export const config = { matcher: protectedRoutes }
+// import { withAuth } from "next-auth/middleware";
+
+// export default withAuth({
+//     pages: {
+//         signIn: "/auth/signin",
+//     },
+// });
