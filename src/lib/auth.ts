@@ -7,7 +7,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { GetServerSidePropsContext } from "next";
 import { prisma } from "@/lib/db";
 
-import { getProvidersEnv } from "@/helpers/env";
+import { getProvidersEnv } from "@/utils/env";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -55,6 +55,7 @@ export const authOptions: NextAuthOptions = {
     ],
     pages: {
         signIn: "/auth/signin",
+        error: "/auth/error", // Error code passed in query string as ?error=
     },
 
 

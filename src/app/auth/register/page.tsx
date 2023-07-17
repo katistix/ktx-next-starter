@@ -3,6 +3,7 @@
 import { HSeparator } from "@/components/primitives/HSeparator";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAuthErrorToast } from "@/utils/authErrorMessages";
 import { faDiscord, faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signIn } from "next-auth/react";
@@ -33,6 +34,11 @@ export default function RegisterPage() {
             callbackUrl: "/",
         });
     }
+
+    useAuthErrorToast();
+
+
+
 
     return (
         <div className="flex items-center justify-center w-full h-screen">

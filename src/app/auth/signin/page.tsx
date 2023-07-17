@@ -1,10 +1,9 @@
 "use client"
 
 import {
-    signIn, useSession,
+    signIn
 } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { faFacebook, faDiscord, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { Button } from "@/components/ui/button";
@@ -12,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Input } from "@/components/ui/input";
 import { HSeparator } from "@/components/primitives/HSeparator";
 import Link from "next/link";
+import { useAuthErrorToast } from "@/utils/authErrorMessages";
 
 
 export default function SigninPage() {
@@ -21,9 +21,11 @@ export default function SigninPage() {
     };
 
     const handleSocialSignin = async (provider: string) => {
-        await signIn(provider, {
+        const result = await signIn(provider, {
             callbackUrl: "/",
         });
+        console.log(result);
+        // toast.success("Successfully signed in!");
     };
 
 
@@ -31,6 +33,7 @@ export default function SigninPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    useAuthErrorToast();
 
     return (
         <div className="flex items-center justify-center w-full h-screen">

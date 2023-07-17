@@ -10,6 +10,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false; /* eslint-disable import/first */
 
 import { Inter } from 'next/font/google'
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,7 +28,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <Provider>
-
+                    <Toaster />
                     {children}
                 </Provider>
             </body>
