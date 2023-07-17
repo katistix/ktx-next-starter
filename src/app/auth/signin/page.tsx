@@ -85,7 +85,8 @@ export default function SigninPage() {
                     <HSeparator text="or" />
 
                     {/* Form */}
-                    <form className="flex flex-col items-center justify-center w-full space-y-4">
+                    <form className="flex flex-col items-center justify-center w-full space-y-4"
+                        onSubmit={handleCredentialsSignin}>
                         {/* Email */}
                         <Input
                             type="email"
@@ -112,7 +113,6 @@ export default function SigninPage() {
                         <Button
                             type="submit"
                             className="w-full"
-                            onClick={handleCredentialsSignin}
                         >
                             Log in
                         </Button>

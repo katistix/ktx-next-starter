@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function RegisterPage() {
 
@@ -23,7 +24,7 @@ export default function RegisterPage() {
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            toast.error("Passwords do not match!");
             return;
         }
 
@@ -90,7 +91,8 @@ export default function RegisterPage() {
                     <HSeparator text="or" />
 
                     {/* Form */}
-                    <form className="flex flex-col items-center justify-center w-full space-y-4">
+                    <form className="flex flex-col items-center justify-center w-full space-y-4"
+                        onSubmit={handleCredentialsRegister}>
                         {/* Email */}
                         <Input
                             type="email"
@@ -98,6 +100,7 @@ export default function RegisterPage() {
                             className="w-full"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            required
                         />
                         {/* Password */}
                         <Input
@@ -106,6 +109,7 @@ export default function RegisterPage() {
                             className="w-full"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            required
                         />
                         {/* Confirm Password */}
                         <Input
@@ -114,12 +118,12 @@ export default function RegisterPage() {
                             className="w-full"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
                         />
                         {/* Login button */}
                         <Button
                             type="submit"
                             className="w-full"
-                            onClick={handleCredentialsRegister}
                         >
                             Create Account
                         </Button>
