@@ -1,36 +1,38 @@
 "use client"
 
-import {
-    signIn, useSession,
-} from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-
-import { faFacebook, faDiscord, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { Button } from "@/components/ui/button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Input } from "@/components/ui/input";
 import { HSeparator } from "@/components/primitives/HSeparator";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { faDiscord, faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useState } from "react";
+
+export default function RegisterPage() {
 
 
-export default function SigninPage() {
-    const handleCredentialsSignin = async (e: any) => {
+    // Stated for the form (if you want to use it)
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+
+    const handleCredentialsRegister = async (e: any) => {
         e.preventDefault();
-        // TODO: Remember to add callbackUrl
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
     };
 
-    const handleSocialSignin = async (provider: string) => {
+    const handleSocialRegister = async (provider: string) => {
         await signIn(provider, {
             callbackUrl: "/",
         });
-    };
-
-
-    // States for the form (if you want to use it)
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
+    }
 
     return (
         <div className="flex items-center justify-center w-full h-screen">
@@ -49,10 +51,10 @@ export default function SigninPage() {
                     {/* Welcome container */}
                     <div className="flex flex-col space-y-2">
                         <h1 className="text-4xl font-bold text-gray-800">
-                            Welcome back, user
+                            Welcome to our app!
                         </h1>
                         <p className="text-gray-500 text-md">
-                            Welcome back! Please enter your details!
+                            Create an account to continue!
                         </p>
                     </div>
                     {/* Social Logins */}
@@ -60,20 +62,20 @@ export default function SigninPage() {
                         {/* Facebook */}
                         <Button
                             className=" shadow-md w-full !bg-blue-500"
-                            onClick={() => handleSocialSignin("facebook")}>
+                            onClick={() => handleSocialRegister("facebook")}>
                             <FontAwesomeIcon icon={faFacebook} />
                             <span className="ml-2">Continue with Facebook</span>
                         </Button>
 
                         <Button
                             className="shadow-md w-full !bg-white !text-gray-700"
-                            onClick={() => handleSocialSignin("google")}>
+                            onClick={() => handleSocialRegister("google")}>
                             <FontAwesomeIcon icon={faGoogle} />
                             <span className="ml-2">Continue with Google</span>
                         </Button>
                         <Button
                             className="shadow-md w-full !bg-indigo-700 !text-white"
-                            onClick={() => handleSocialSignin("discord")}>
+                            onClick={() => handleSocialRegister("discord")}>
                             <FontAwesomeIcon icon={faDiscord} />
                             <span className="ml-2">Continue with Discord</span>
                         </Button>
@@ -99,29 +101,31 @@ export default function SigninPage() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        {/* Forgot password */}
-                        <div className="flex justify-end w-full">
-                            <Link
-                                className="mb-4 text-xs text-gray-500"
-                                href="#">Forgot password?</Link>
-                        </div>
+                        {/* Confirm Password */}
+                        <Input
+                            type="password"
+                            placeholder="Confirm Password"
+                            className="w-full"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
                         {/* Login button */}
                         <Button
                             type="submit"
                             className="w-full"
-                            onClick={handleCredentialsSignin}
+                            onClick={handleCredentialsRegister}
                         >
-                            Log in
+                            Create Account
                         </Button>
                     </form>
-                    {/* Don't have an account */}
+                    {/* Already have account */}
                     <div className="flex flex-col items-center justify-center w-full space-y-2">
                         <p className="mt-4 text-xs text-gray-500">
-                            {`Don't have an account?`}
+                            Already have an account?
                             <Link
                                 className="ml-1 text-xs font-medium text-gray-900"
-                                href="/auth/register">
-                                Sign up for free
+                                href="/auth/signin">
+                                Log in
                             </Link>
                         </p>
                     </div>
