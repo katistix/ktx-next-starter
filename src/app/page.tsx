@@ -1,5 +1,6 @@
 "use client"
 
+import ResponsiveNavbar from "@/components/layout/ResponsiveNavbar";
 import {
     signOut, useSession,
 } from "next-auth/react";

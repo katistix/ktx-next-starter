@@ -11,6 +11,7 @@ config.autoAddCss = false; /* eslint-disable import/first */
 
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast';
+import ResponsiveNavbar from '@/components/layout/ResponsiveNavbar';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             <body className={inter.className}>
                 <Provider>
                     <Toaster />
+                    <ResponsiveNavbar className='' />
                     {children}
                 </Provider>
             </body>
