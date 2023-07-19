@@ -7,7 +7,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { GetServerSidePropsContext } from "next";
 import { prisma } from "@/lib/db";
 
-import { getProvidersEnv } from "@/utils/env";
+import { serverEnv } from "@/utils/serverEnv";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -45,12 +45,12 @@ export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         DiscordProvider({
-            clientId: getProvidersEnv().DISCORD_CLIENT_ID,
-            clientSecret: getProvidersEnv().DISCORD_CLIENT_SECRET,
+            clientId: serverEnv.DISCORD_CLIENT_ID,
+            clientSecret: serverEnv.DISCORD_CLIENT_SECRET,
         }),
         GoogleProvider({
-            clientId: getProvidersEnv().GOOGLE_CLIENT_ID,
-            clientSecret: getProvidersEnv().GOOGLE_CLIENT_SECRET,
+            clientId: serverEnv.GOOGLE_CLIENT_ID,
+            clientSecret: serverEnv.GOOGLE_CLIENT_SECRET,
         }),
     ],
     pages: {
