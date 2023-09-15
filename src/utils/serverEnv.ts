@@ -14,13 +14,9 @@ export const serverEnvSchema = z.object({
     GOOGLE_CLIENT_ID: z.string().nonempty(),
     GOOGLE_CLIENT_SECRET: z.string().nonempty(),
     // Database
-    POSTGRES_URL: z.string().nonempty(),
-    POSTGRES_PRISMA_URL: z.string().nonempty(),
-    POSTGRES_URL_NON_POOLING: z.string().nonempty(),
     POSTGRES_USER: z.string().nonempty(),
-    POSTGRES_HOST: z.string().nonempty(),
     POSTGRES_PASSWORD: z.string().nonempty(),
-    POSTGRES_DATABASE: z.string().nonempty(),
+    DATABASE_URL: z.string().nonempty(),
     // Stripe
     // ...
 });
